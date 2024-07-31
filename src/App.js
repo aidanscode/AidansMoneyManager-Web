@@ -1,23 +1,35 @@
 import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom'
+import Layout from './components/layout'
+import Login from './routes/login'
+import { ProvideAuth } from './auth'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
       <div>
-        <span>Hello, world :)</span>
-        <Link to='/test'>Click me</Link>
+        <Layout>
+          <Link to='/login'>Click me</Link>
+        </Layout>
       </div>
     )
   },
   {
-    path: '/test',
-    element: <div>Testing route</div>
+    path: '/login',
+    element: (
+      <Layout>
+        <Login />
+      </Layout>
+    )
   }
 ])
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <ProvideAuth>
+      <RouterProvider router={router} />
+    </ProvideAuth>
+  )
 }
 
 export default App
