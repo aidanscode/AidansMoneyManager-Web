@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const AuthContext = createContext()
 
@@ -7,14 +8,29 @@ export const ProvideAuth = ({ children }) => {
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
 }
 
+export const Protected = ({ children }) => {
+  const navigate = useNavigate()
+  const auth = useAuth()
+  const user = auth.user
+  const ready = auth.ready
+
+  useEffect(() => {
+    if (ready && !user) {
+      navigate('/login', { replace: true })
+    }
+  }, [ready, user])
+
+  return <>{children}</>
+}
+
 export const useAuth = () => {
   return useContext(AuthContext)
 }
 
 const useProvideAuth = () => {
+  const [ready, setReady] = useState(false)
   const [user, setUser] = useState(null)
-  const [authToken, setAuthToken] = useState(null)
-  const [authTokenExpiry, setAuthTokenExpiry] = useState(null)
+  const [tokenExpiry, setTokenExpiry] = useState(null)
 
   const logIn = async (email, password) => {
     try {
@@ -34,8 +50,7 @@ const useProvideAuth = () => {
       }
       const parsed = parseAuthToken(body.authToken)
       setUser(parsed.user)
-      setAuthToken(body.authToken)
-      setAuthTokenExpiry(parsed.expiry)
+      setTokenExpiry(parsed.expiry)
       return null
     } catch (error) {
       console.error('Failed to login', error)
@@ -43,11 +58,23 @@ const useProvideAuth = () => {
     }
   }
 
-  // useEffect(() => {
-  //   //try find key in local storage, validate if so
-  // }, [])
+  useEffect(() => {
+    const checkAuth = async () => {
+      const response = await fetch('/api/auth/whoami', {
+        method: 'POST'
+      })
+      if (response.ok) {
+        const body = await response.json()
+        setUser(body.user)
+        setTokenExpiry(body.exp)
+      }
+      setReady(true)
+    }
+    checkAuth()
+  }, [])
 
   return {
+    ready,
     user,
     logIn
   }
