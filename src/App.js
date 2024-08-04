@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider, Link } from 'react-router-dom'
 import Layout from './components/layout'
 import Login from './routes/login'
 import Budget from './routes/budget'
-import { Protected, ProvideAuth } from './auth'
+import { NoAuth, Protected, ProvideAuth } from './auth'
 
 const router = createBrowserRouter([
   {
@@ -18,9 +18,11 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: (
-      <Layout>
-        <Login />
-      </Layout>
+      <NoAuth>
+        <Layout>
+          <Login />
+        </Layout>
+      </NoAuth>
     )
   },
   {

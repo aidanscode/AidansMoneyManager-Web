@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useAuth } from '../../auth'
-import { useNavigate } from 'react-router-dom'
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -9,7 +8,6 @@ function Login() {
   const [pending, setPending] = useState(false)
 
   const auth = useAuth()
-  const navigate = useNavigate()
 
   const tryLogin = async () => {
     setPending(true)
@@ -20,7 +18,6 @@ function Login() {
       setError('')
     }
     setPending(false)
-    navigate('/budget', { replace: false })
   }
 
   const handleSubmit = e => {
@@ -85,11 +82,6 @@ function Login() {
               {error && (
                 <p className='text-danger fs-6 fst-italic mt-2 mb-0'>
                   Error: {error}
-                </p>
-              )}
-              {auth.user && (
-                <p className='text-success fs-6 fst-italic mt-2 mb-0'>
-                  Welcome, {auth.user.email}!
                 </p>
               )}
             </div>

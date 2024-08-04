@@ -15,9 +15,20 @@ export const Protected = ({ children }) => {
   const ready = auth.ready
 
   useEffect(() => {
-    if (ready && !user) {
-      navigate('/login', { replace: true })
-    }
+    if (ready && !user) navigate('/login', { replace: true })
+  }, [ready, user])
+
+  return <>{children}</>
+}
+
+export const NoAuth = ({ children }) => {
+  const navigate = useNavigate()
+  const auth = useAuth()
+  const user = auth.user
+  const ready = auth.ready
+
+  useEffect(() => {
+    if (ready && user) navigate('/budget', { replace: true })
   }, [ready, user])
 
   return <>{children}</>
