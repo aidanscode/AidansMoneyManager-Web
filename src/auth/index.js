@@ -58,6 +58,25 @@ const useProvideAuth = () => {
     }
   }
 
+  const logOut = async () => {
+    try {
+      const response = await fetch('/api/auth/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      if (!response.ok) {
+        return 'An unexpected error occurred'
+      }
+      setUser(null)
+      setTokenExpiry(null)
+    } catch (error) {
+      console.error('Failed to log out', error)
+      return 'An unexpected error occurred'
+    }
+  }
+
   useEffect(() => {
     const checkAuth = async () => {
       const response = await fetch('/api/auth/whoami', {
@@ -76,7 +95,8 @@ const useProvideAuth = () => {
   return {
     ready,
     user,
-    logIn
+    logIn,
+    logOut
   }
 }
 

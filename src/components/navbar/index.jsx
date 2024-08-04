@@ -1,6 +1,15 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../auth'
 
 function Navbar() {
+  const auth = useAuth()
+
+  const tryLogout = async e => {
+    e.preventDefault()
+    const error = await auth.logOut()
+    if (error) alert(error)
+  }
+
   return (
     <nav
       className='navbar navbar-expand-lg bg-dark border-bottom border-body mb-4'
@@ -30,11 +39,19 @@ function Navbar() {
             </li>
           </ul>
           <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
-            <li className='nav-item'>
-              <Link className='nav-link' to='/login'>
-                Login
-              </Link>
-            </li>
+            {auth.user ? (
+              <li className='nav-item'>
+                <Link className='nav-link' to='/logout' onClick={tryLogout}>
+                  Log Out
+                </Link>
+              </li>
+            ) : (
+              <li className='nav-item'>
+                <Link className='nav-link' to='/login'>
+                  Login
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>
