@@ -16,7 +16,7 @@ export const Protected = ({ children }) => {
 
   useEffect(() => {
     if (ready && !user) navigate('/login', { replace: true })
-  }, [ready, user])
+  }, [ready, user, navigate])
 
   return <>{children}</>
 }
@@ -29,7 +29,7 @@ export const NoAuth = ({ children }) => {
 
   useEffect(() => {
     if (ready && user) navigate('/budget', { replace: true })
-  }, [ready, user])
+  }, [ready, user, navigate])
 
   return <>{children}</>
 }
