@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import Icon from '../../../util/icon'
+import Icon from '../../../../util/icon'
 import EditCategoryName from './edit-name'
 
-function CategoryHeader({ name, editName, deleteCategory, categoryType }) {
+function CategoryHeader({ name, editName, deleteCategory, bgClass }) {
   const [isInEditMode, setIsInEditMode] = useState(false)
 
   const submitNewName = newName => {
@@ -11,7 +11,7 @@ function CategoryHeader({ name, editName, deleteCategory, categoryType }) {
   }
 
   return (
-    <div className={getCardHeaderClassName(categoryType)}>
+    <div className={getCardHeaderClassName(bgClass)}>
       <div className='d-flex justify-content-between align-items-center fs-5'>
         {isInEditMode ? (
           <EditCategoryName
@@ -39,8 +39,8 @@ function CategoryHeader({ name, editName, deleteCategory, categoryType }) {
   )
 }
 
-const getCardHeaderClassName = categoryType => {
-  return `card-header ${categoryType === 'Income' ? 'bg-success text-white' : 'bg-warning'}`
+const getCardHeaderClassName = bgClass => {
+  return `card-header ${bgClass}`
 }
 
 export default CategoryHeader

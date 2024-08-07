@@ -1,13 +1,9 @@
 import CategoryHeader from './header'
 
-function BudgetCategory({
-  category,
-  editCategory,
-  deleteCategory,
-  categoryType
-}) {
+function BudgetCategory({ category, editCategory, deleteCategory, bgClass }) {
   const editName = newName => {
-    editCategory({ ...category, name: newName })
+    const newCategory = structuredClone(category)
+    editCategory({ ...newCategory, name: newName })
   }
 
   return (
@@ -16,7 +12,7 @@ function BudgetCategory({
         name={category.name}
         editName={editName}
         deleteCategory={deleteCategory}
-        categoryType={categoryType}
+        bgClass={bgClass}
       />
       <div className='card-body'>
         <pre>{JSON.stringify(category.items, null, 2)}</pre>

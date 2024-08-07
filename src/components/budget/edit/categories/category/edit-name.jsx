@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import Icon from '../../../util/icon'
+import Icon from '../../../../util/icon'
 
 function EditCategoryName({ name, save, cancel }) {
   const [newName, setNewName] = useState(name)
