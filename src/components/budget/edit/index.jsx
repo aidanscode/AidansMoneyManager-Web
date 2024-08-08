@@ -24,7 +24,7 @@ function EditBudget({ budget, setBudget }) {
       <div className='col-lg-8'>
         <CategoryGroup
           categoryGroup={budget.Income}
-          name='Income'
+          categoryType='Income'
           textClass='text-success'
           bgClass='bg-success text-white'
           addCategory={name => addCategory('Income', name)}
@@ -36,7 +36,7 @@ function EditBudget({ budget, setBudget }) {
 
         <CategoryGroup
           categoryGroup={budget.Assignments}
-          name='Assignments'
+          categoryType='Assignments'
           textClass='text-warning'
           bgClass='bg-warning'
           addCategory={name => addCategory('Assignments', name)}

@@ -3,7 +3,7 @@ import CreateCategory from './category/create'
 
 function CategoryGroup({
   categoryGroup,
-  name,
+  categoryType,
   textClass,
   bgClass,
   addCategory,
@@ -12,7 +12,7 @@ function CategoryGroup({
 }) {
   return (
     <div className='mb-3'>
-      <h3 className={`h-3 ${textClass}`}>{name}</h3>
+      <h3 className={`h-3 ${textClass}`}>{categoryType}</h3>
       {categoryGroup.map((incomeCategory, index) => {
         return (
           <BudgetCategory
