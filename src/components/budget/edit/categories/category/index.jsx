@@ -1,7 +1,13 @@
 import CategoryHeader from './header'
 import BudgetItems from './items'
 
-function BudgetCategory({ category, editCategory, deleteCategory, bgClass }) {
+function BudgetCategory({
+  category,
+  editCategory,
+  deleteCategory,
+  textClass,
+  bgClass
+}) {
   const editName = newName => {
     const newCategory = structuredClone(category)
     editCategory({ ...newCategory, name: newName })
@@ -22,7 +28,11 @@ function BudgetCategory({ category, editCategory, deleteCategory, bgClass }) {
         bgClass={bgClass}
       />
       <div className='card-body'>
-        <BudgetItems items={category.items} addItem={addItem} />
+        <BudgetItems
+          items={category.items}
+          addItem={addItem}
+          textClass={textClass}
+        />
       </div>
     </div>
   )

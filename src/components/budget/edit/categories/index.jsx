@@ -20,6 +20,7 @@ function CategoryGroup({
             category={incomeCategory}
             editCategory={newCategory => editCategory(index, newCategory)}
             deleteCategory={() => deleteCategory(index)}
+            textClass={textClass}
             bgClass={bgClass}
           />
         )

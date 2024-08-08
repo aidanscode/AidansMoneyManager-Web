@@ -3,6 +3,7 @@ import Layout from './components/layout'
 import Login from './routes/login'
 import Budget from './routes/budget'
 import { NoAuth, Protected, ProvideAuth } from './auth'
+import { ProvideFormatting } from './util/formatting'
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <ProvideAuth>
-      <RouterProvider router={router} />
+      <ProvideFormatting>
+        <RouterProvider router={router} />
+      </ProvideFormatting>
     </ProvideAuth>
   )
 }

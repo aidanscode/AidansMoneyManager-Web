@@ -1,3 +1,4 @@
+import BudgetOverview from '../overview'
 import CategoryGroup from './categories'
 
 function EditBudget({ budget, setBudget }) {
@@ -45,6 +46,9 @@ function EditBudget({ budget, setBudget }) {
           }
           deleteCategory={index => deleteCategory('Assignments', index)}
         />
+      </div>
+      <div className='col-lg-4'>
+        <BudgetOverview budget={budget} />
       </div>
     </div>
   )
