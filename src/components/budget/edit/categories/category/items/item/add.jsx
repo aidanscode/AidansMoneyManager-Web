@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 function AddItem({ addItem }) {
   const [isInEditMode, setIsInEditMode] = useState(false)
   const [name, setName] = useState('')
   const [amount, setAmount] = useState('')
   const [error, setError] = useState(null)
+  const nameRef = useRef(null)
 
   const updateAmount = e => {
     const val = e.target.value
@@ -30,6 +31,10 @@ function AddItem({ addItem }) {
     cancel()
   }
 
+  useEffect(() => {
+    isInEditMode && nameRef.current.focus()
+  }, [isInEditMode])
+
   if (!isInEditMode) {
     return (
       <button className='btn btn-primary' onClick={() => setIsInEditMode(true)}>
@@ -48,6 +53,7 @@ function AddItem({ addItem }) {
           <input
             type='text'
             className='form-control'
+            ref={nameRef}
             value={name}
             onChange={e => setName(e.target.value)}
           />
