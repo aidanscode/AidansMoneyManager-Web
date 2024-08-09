@@ -27,7 +27,7 @@ function AddItem({ addItem }) {
       setError('Please enter a valid name and amount to submit!')
       return
     }
-    addItem({ name, amount: Number(amount) })
+    addItem({ name, amount: Number(amount), transactions: [] })
     cancel()
   }
 

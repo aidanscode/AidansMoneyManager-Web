@@ -9,7 +9,7 @@ function Icon({ name, margin, onClick }) {
 }
 
 const getIconClassName = (name, margin) => {
-  return `bi ${name} ${margin ?? null}`
+  return `bi ${name} ${margin ?? ''}`
 }
 
 export default Icon
