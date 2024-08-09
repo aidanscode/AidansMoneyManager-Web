@@ -15,6 +15,7 @@ function BudgetOverview({ budget }) {
       <h3 className='h-3 text-success'>Overview</h3>
       <div className='card'>
         <div className='card-body'>
+          <h5>Budgeted</h5>
           <div className='d-flex justify-content-between'>
             <span className='text-success fw-bold'>Total Income</span>
             <span className='text-success'>
