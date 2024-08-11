@@ -7,6 +7,12 @@ function Item({ item, textClass, editItem, deleteItem }) {
   const formatter = useFormatting()
   const [isExpanded, setIsExpanded] = useState(false)
 
+  const addTransaction = newTransaction => {
+    const newItem = structuredClone(item)
+    newItem.transactions.push(newTransaction)
+    editItem(newItem)
+  }
+
   return (
     <div>
       <div
@@ -36,7 +42,7 @@ function Item({ item, textClass, editItem, deleteItem }) {
               {item.transactions.map((transaction, index) => {
                 return <Transaction key={index} transaction={transaction} />
               })}
-              <CreateTransaction />
+              <CreateTransaction addTransaction={addTransaction} />
             </tbody>
           </table>
         </>

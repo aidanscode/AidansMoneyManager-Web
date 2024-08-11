@@ -19,6 +19,12 @@ function BudgetCategory({
     editCategory(newCategory)
   }
 
+  const editItem = (index, newItem) => {
+    const newCategory = structuredClone(category)
+    newCategory.items[index] = newItem
+    editCategory(newCategory)
+  }
+
   return (
     <div className='card my-3'>
       <CategoryHeader
@@ -31,6 +37,7 @@ function BudgetCategory({
         <BudgetItems
           items={category.items}
           addItem={addItem}
+          editItem={editItem}
           textClass={textClass}
         />
       </div>

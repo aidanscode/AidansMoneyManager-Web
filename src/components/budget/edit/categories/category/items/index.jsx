@@ -1,13 +1,17 @@
 import Item from './item'
 import AddItem from './item/add'
 
-function BudgetItems({ items, addItem, textClass }) {
+function BudgetItems({ items, addItem, editItem, textClass }) {
   return (
     <ul className='list-group'>
       {items.map((item, index) => {
         return (
           <li className='list-group-item' key={index}>
-            <Item item={item} textClass={textClass} />
+            <Item
+              item={item}
+              editItem={newItem => editItem(index, newItem)}
+              textClass={textClass}
+            />
           </li>
         )
       })}
