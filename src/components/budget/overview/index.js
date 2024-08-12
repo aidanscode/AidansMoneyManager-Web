@@ -1,13 +1,11 @@
+import { sumAmountFromCategories } from '../../../util/budget'
 import { useFormatting } from '../../../util/formatting'
 
 function BudgetOverview({ budget }) {
   const formatter = useFormatting()
 
-  const incomeTotal = sumFieldFromCategoryItems(budget.Income, 'amount')
-  const assignmentsTotal = sumFieldFromCategoryItems(
-    budget.Assignments,
-    'amount'
-  )
+  const incomeTotal = sumAmountFromCategories(budget.Income)
+  const assignmentsTotal = sumAmountFromCategories(budget.Assignments)
   const remaining = incomeTotal - assignmentsTotal
 
   return (
@@ -47,17 +45,6 @@ function BudgetOverview({ budget }) {
       </div>
     </div>
   )
-}
-
-const sumFieldFromCategoryItems = (categories, field) => {
-  return categories.reduce((categoryAccumulator, category) => {
-    return (
-      categoryAccumulator +
-      category.items.reduce((itemsAccumulator, item) => {
-        return itemsAccumulator + item[field]
-      }, 0)
-    )
-  }, 0)
 }
 
 export default BudgetOverview

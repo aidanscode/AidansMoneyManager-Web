@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useFormatting } from '../../../../../../../util/formatting'
 import CreateTransaction from './transaction/create'
 import Transaction from './transaction'
+import { sumTransactionAmountFromLineItem } from '../../../../../../../util/budget'
 
 function Item({ item, textClass, editItem, deleteItem }) {
   const formatter = useFormatting()
@@ -33,9 +34,17 @@ function Item({ item, textClass, editItem, deleteItem }) {
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <h5 className='card-title'>{item.name}</h5>
-        <div className='d-flex flex-column'>
-          <span className={textClass}>Budgeted</span>
-          <span>{formatter.formatCurrency(item.amount)}</span>
+        <div className='d-flex flex-row'>
+          <div className='d-flex flex-column me-3'>
+            <span className={textClass}>Budgeted</span>
+            <span>{formatter.formatCurrency(item.amount)}</span>
+          </div>
+          <div className='d-flex flex-column'>
+            <span className={textClass}>Actual</span>
+            <span>
+              {formatter.formatCurrency(sumTransactionAmountFromLineItem(item))}
+            </span>
+          </div>
         </div>
       </div>
       {isExpanded && (

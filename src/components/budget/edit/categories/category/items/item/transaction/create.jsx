@@ -16,7 +16,7 @@ function CreateTransaction({
   const updateAmount = e => {
     const val = e.target.value
     if (!val || val.match(/^\d{1,}(\.\d{0,2})?$/)) {
-      setAmount(val)
+      setAmount(Number(val))
     }
   }
 
