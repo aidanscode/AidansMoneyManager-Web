@@ -1,9 +1,20 @@
-export const sumAmountFromCategories = categories => {
+export const sumLineItemAmountFromCategories = categories => {
   return categories.reduce((categoryAccumulator, category) => {
     return (
       categoryAccumulator +
       category.items.reduce((itemsAccumulator, item) => {
         return itemsAccumulator + item.amount
+      }, 0)
+    )
+  }, 0)
+}
+
+export const sumTransactionAmountFromCategories = categories => {
+  return categories.reduce((categoryAccumulator, category) => {
+    return (
+      categoryAccumulator +
+      category.items.reduce((itemsAccumulator, item) => {
+        return itemsAccumulator + sumTransactionAmountFromLineItem(item)
       }, 0)
     )
   }, 0)
