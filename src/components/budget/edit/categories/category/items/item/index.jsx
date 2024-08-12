@@ -41,6 +41,11 @@ function Item({ item, textClass, editItem, deleteItem }) {
       {isExpanded && (
         <>
           <hr />
+          <div className='d-flex justify-content-end'>
+            <button className='btn btn-danger btn-sm' onClick={deleteItem}>
+              Delete Line Item
+            </button>
+          </div>
           <table className='table table-sm table-striped align-middle text-center'>
             <thead>
               <tr>

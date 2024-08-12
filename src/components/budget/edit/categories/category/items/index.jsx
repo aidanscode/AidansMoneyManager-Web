@@ -1,7 +1,7 @@
 import Item from './item'
 import AddItem from './item/add'
 
-function BudgetItems({ items, addItem, editItem, textClass }) {
+function BudgetItems({ items, addItem, editItem, deleteItem, textClass }) {
   return (
     <ul className='list-group'>
       {items.map((item, index) => {
@@ -10,6 +10,7 @@ function BudgetItems({ items, addItem, editItem, textClass }) {
             <Item
               item={item}
               editItem={newItem => editItem(index, newItem)}
+              deleteItem={() => deleteItem(index)}
               textClass={textClass}
             />
           </li>
