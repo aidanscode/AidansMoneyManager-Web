@@ -13,6 +13,18 @@ function Item({ item, textClass, editItem, deleteItem }) {
     editItem(newItem)
   }
 
+  const editTransaction = (index, newTransaction) => {
+    const newItem = structuredClone(item)
+    newItem.transactions[index] = newTransaction
+    editItem(newItem)
+  }
+
+  const deleteTransaction = index => {
+    const newItem = structuredClone(item)
+    newItem.transactions.splice(index, 1)
+    editItem(newItem)
+  }
+
   return (
     <div>
       <div
@@ -40,7 +52,16 @@ function Item({ item, textClass, editItem, deleteItem }) {
             </thead>
             <tbody>
               {item.transactions.map((transaction, index) => {
-                return <Transaction key={index} transaction={transaction} />
+                return (
+                  <Transaction
+                    key={index}
+                    transaction={transaction}
+                    editTransaction={newTransaction =>
+                      editTransaction(index, newTransaction)
+                    }
+                    deleteTransaction={() => deleteTransaction(index)}
+                  />
+                )
               })}
               <CreateTransaction addTransaction={addTransaction} />
             </tbody>

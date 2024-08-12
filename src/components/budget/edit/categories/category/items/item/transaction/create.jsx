@@ -1,11 +1,17 @@
 import { useState } from 'react'
 import Icon from '../../../../../../../util/icon'
 
-function CreateTransaction({ addTransaction }) {
-  const [name, setName] = useState('')
-  const [date, setDate] = useState('')
-  const [amount, setAmount] = useState('')
-  const [error, setError] = useState('')
+function CreateTransaction({
+  addTransaction,
+  defaultName = '',
+  defaultDate = '',
+  defaultAmount = '',
+  defaultError = ''
+}) {
+  const [name, setName] = useState(defaultName)
+  const [date, setDate] = useState(defaultDate)
+  const [amount, setAmount] = useState(defaultAmount)
+  const [error, setError] = useState(defaultError)
 
   const updateAmount = e => {
     const val = e.target.value
